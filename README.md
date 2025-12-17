@@ -37,23 +37,31 @@ It maps values into the range (0, 1), making it suitable for binary logic output
 
 Each gate is trained on its corresponding truth table.
 
-AND:
-(0,0) → 0  
-(0,1) → 0  
-(1,0) → 0  
-(1,1) → 1  
+Each gate is trained on its truth table:
 
-OR:
-(0,0) → 0  
-(0,1) → 1  
-(1,0) → 1  
-(1,1) → 1  
+### AND
+| x1 | x2 | y |
+|----|----|---|
+| 0  | 0  | 0 |
+| 0  | 1  | 0 |
+| 1  | 0  | 0 |
+| 1  | 1  | 1 |
 
-NAND:
-(0,0) → 1  
-(0,1) → 1  
-(1,0) → 1  
-(1,1) → 0  
+### OR
+| x1 | x2 | y |
+|----|----|---|
+| 0  | 0  | 0 |
+| 0  | 1  | 1 |
+| 1  | 0  | 1 |
+| 1  | 1  | 1 |
+
+### NAND
+| x1 | x2 | y |
+|----|----|---|
+| 0  | 0  | 1 |
+| 0  | 1  | 1 |
+| 1  | 0  | 1 |
+| 1  | 1  | 0 |
 
 ---
 
