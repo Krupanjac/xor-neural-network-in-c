@@ -3,7 +3,7 @@
 This project implements basic logic gates (AND, OR, NAND) and builds an XOR gate using a small neural network written entirely in C, without any machine-learning libraries.
 
 
-![img](https://i.sstatic.net/nRZ6z.png)
+![img](https://i.imgur.com/Md5gF4F.png)
 
 
 The project is purely educational and demonstrates how neural networks work internally: cost functions, sigmoid activation, numerical gradients, and gradient descent.
