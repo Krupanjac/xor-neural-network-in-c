@@ -14,7 +14,9 @@ The project is purely educational and demonstrates how neural networks work inte
 
 Each logic gate is represented as a single neuron:
 
-y = sigmoid(w1 * x1 + w2 * x2 + b)
+$$
+y = \sigma(w_1 x_1 + w_2 x_2 + b)
+$$
 
 Where:
 - w1, w2 are weights
@@ -23,7 +25,9 @@ Where:
 
 XOR is not linearly separable, so it cannot be learned by a single neuron. Instead, XOR is constructed using multiple learned gates:
 
-XOR(x1, x2) = AND( OR(x1, x2), NAND(x1, x2) )
+$$
+XOR(x_1, x_2) = AND(OR(x_1, x_2),\, NAND(x_1, x_2))
+$$
 
 ---
 
@@ -31,7 +35,9 @@ XOR(x1, x2) = AND( OR(x1, x2), NAND(x1, x2) )
 
 The sigmoid function is used for all neurons:
 
-sigmoid(x) = 1 / (1 + e^(−x))
+$$
+\sigma(x) = \frac{1}{1 + e^{-x}}
+$$
 
 It maps values into the range (0, 1), making it suitable for binary logic outputs.
 
@@ -73,7 +79,9 @@ Each gate is trained on its truth table:
 
 Training minimizes Mean Squared Error (MSE):
 
-MSE = (1/N) * Σ(y_pred − y_true)²
+$$
+MSE = \frac{1}{N} \sum (y_{pred} - y_{true})^2
+$$
 
 Lower cost means the neuron behaves closer to the correct logic gate.
 
@@ -83,11 +91,15 @@ Lower cost means the neuron behaves closer to the correct logic gate.
 
 Instead of analytical derivatives, gradients are computed using finite differences:
 
-∂C/∂w ≈ (C(w + ε) − C(w)) / ε
+$$
+\frac{\partial C}{\partial w} \approx \frac{C(w + \varepsilon) - C(w)}{\varepsilon}
+$$
 
 Weights are updated using gradient descent:
 
-w = w − learning_rate * gradient
+$$
+w := w - \eta \cdot \nabla C
+$$
 
 This approach is slow but very clear and educational.
 
@@ -96,13 +108,13 @@ This approach is slow but very clear and educational.
 ## Gate Structure
 
 Each logic gate is stored as:
-
+```
 typedef struct Gate {
     float w1;
     float w2;
     float b;
 } Gate;
-
+```
 Each gate is trained independently.
 
 ---
