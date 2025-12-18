@@ -117,8 +117,8 @@ float train_data_xor[][3] = {
 
 
 srand(time(0));
-float eps = 1e-1f;
-float rate = 1e-1f;
+float eps = 0.1f;
+float rate = 0.1f;
 size_t iterations = 100000;
 
 Gate g_nand = {rand_float(), rand_float(), rand_float()};
