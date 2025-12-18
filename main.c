@@ -53,7 +53,7 @@ void test_model(Gate g, float train_data[][3], size_t train_data_size) {
         float x1 = train_data[i][0];
         float x2 = train_data[i][1];
         float y_pred = sigmoidf(x1 * g.w1 + x2 * g.w2 + g.b);
-        printf("Input: (%.1f, %.1f), Predicted: %.1f, Actual: %.1f\n", x1, x2, y_pred, train_data[i][2]);
+        printf("Input: (%.2f, %.2f), Predicted: %f (~%.1f), Actual: %.0f\n", x1, x2, y_pred, y_pred, train_data[i][2]);
     }
 }
 
