@@ -152,7 +152,7 @@ for (size_t i = 0; i < train_data_size_xor; ++i) {
 }
 
 train_model(&g_xor_final, eps, rate, iterations, train_data_xor_combined, train_data_size_xor);
-printf("\nALO XOR Gate Parameters:\n");
+printf("\nXOR Gate Parameters:\n");
 for (size_t i = 0; i < train_data_size_xor; ++i) {
         float x1 = train_data_xor[i][0];
         float x2 = train_data_xor[i][1];
