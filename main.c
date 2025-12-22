@@ -69,14 +69,6 @@ void train_model(Gate *g, float eps, float rate, size_t iterations, float train_
 }
 
 
-float forward_xor(float x1, float x2, Gate g_nand, Gate g_and, Gate g_or) {
-    float nand_out = sigmoidf(x1 * g_nand.w1 + x2 * g_nand.w2 + g_nand.b);
-    float and_out = sigmoidf(x1 * g_and.w1 + x2 * g_and.w2 + g_and.b);
-    float or_out = sigmoidf(x1 * g_or.w1 + x2 * g_or.w2 + g_or.b);
-    float xor_out = sigmoidf(or_out * g_and.w1 + nand_out * g_and.w2 + g_and.b);
-    return xor_out;
-}
-
 int main () {
     //nand gate
 float train_data_nand[][3] = {
@@ -119,7 +111,7 @@ float train_data_xor[][3] = {
 srand(time(0));
 float eps = 0.1f;
 float rate = 0.1f;
-size_t iterations = 100000;
+size_t iterations = 220000;
 
 Gate g_nand = {rand_float(), rand_float(), rand_float()};
 Gate g_and = {rand_float(), rand_float(), rand_float()};
@@ -145,7 +137,7 @@ test_model(g_or, train_data_or, train_data_size_or);
 //xor is  (OR AND NOT(AND))
 Gate g_xor_final = {rand_float(), rand_float(), rand_float()};
 
-float train_data_xor_combined[][3] = {0};
+float train_data_xor_combined[4][3];
 for (size_t i = 0; i < train_data_size_xor; ++i) {
     float x1 = train_data_xor[i][0];
     float x2 = train_data_xor[i][1];
@@ -160,9 +152,19 @@ for (size_t i = 0; i < train_data_size_xor; ++i) {
 }
 
 train_model(&g_xor_final, eps, rate, iterations, train_data_xor_combined, train_data_size_xor);
-printf("\nXOR Gate Parameters:\n");
-//print_gate(g_xor_final);
-test_model(g_xor_final, train_data_xor_combined, train_data_size_xor);
+printf("\nALO XOR Gate Parameters:\n");
+for (size_t i = 0; i < train_data_size_xor; ++i) {
+        float x1 = train_data_xor[i][0];
+        float x2 = train_data_xor[i][1];
+
+        float nand_out = sigmoidf(x1 * g_nand.w1 + x2 * g_nand.w2 + g_nand.b);
+        float or_out   = sigmoidf(x1 * g_or.w1   + x2 * g_or.w2   + g_or.b);
+        
+        float xor_out = sigmoidf(or_out * g_xor_final.w1 + nand_out * g_xor_final.w2 + g_xor_final.b);
+        
+        printf("Input: (%.0f, %.0f) -> Hidden(OR:%.2f, NAND:%.2f) -> Predicted: %f(~%.1f) (Actual: %.0f)\n",
+               x1, x2, or_out, nand_out, xor_out, xor_out, train_data_xor[i][2]);
+    }
 
 
 
