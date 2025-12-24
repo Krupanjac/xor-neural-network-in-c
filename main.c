@@ -65,10 +65,6 @@ void test_model(Gate g, float train_data[][3], size_t train_data_size) {
     }
 }
 
-void print_gate(Gate g) {
-    printf("w1: %f, w2: %f, b: %f\n", sigmoidf(g.w1), sigmoidf(g.w2), sigmoidf(g.b));
-}
-
 void train_model(Gate *g, float eps, float rate, size_t iterations, float train_data[][3], size_t train_data_size) {
     for (size_t i = 0; i < iterations; ++i) {
         Gate grad = finite_difference(*g, eps, train_data, train_data_size);
@@ -130,15 +126,12 @@ train_model(&g_and, eps, rate, iterations, train_data_and, train_data_size_and);
 train_model(&g_or, eps, rate, iterations, train_data_or, train_data_size_or);
 
 printf("NAND Gate Parameters:\n");
-//print_gate(g_nand);
 test_model(g_nand, train_data_nand, train_data_size_nand);
 
 printf("\nAND Gate Parameters:\n");
-//print_gate(g_and);
 test_model(g_and, train_data_and, train_data_size_and);
 
 printf("\nOR Gate Parameters:\n");
-//print_gate(g_or); 
 test_model(g_or, train_data_or, train_data_size_or);
 
 
